@@ -13,6 +13,7 @@ const createState = (setState) => ({
     })),
 });
 const useStore = create(createState);
+const useStore2 = create(createState);
 
 function App() {
   const Counter = () => {
@@ -31,11 +32,27 @@ function App() {
       </div>
     );
   };
+  const Counter2 = () => {
+    const count = useStore2((state) => state.n);
+    const inc = useStore2((state) => state.increment);
+    return (
+      <div>
+        <div>
+          <div>count is {count}</div>
+          <button type="button" onClick={inc}>
+            +1
+          </button>
+        </div>
+      </div>
+    );
+  };
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
+        <Counter />
+        <Counter2 />
       </header>
     </div>
   );

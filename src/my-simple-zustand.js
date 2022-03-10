@@ -2,8 +2,6 @@
 import { useSyncExternalStore } from "use-sync-external-store/shim";
 
 const create = (createState) => {
-  // let state = initState;
-  //state;
   console.log("createState =", createState);
 
   // We need a set of listeners to notify the state updates.
@@ -25,7 +23,7 @@ const create = (createState) => {
       listener(); // = handleStoreChange() in use-sync-external-store
       /*
        * createState()により作成された共通stateの各propertyに対して更新をチェックし、
-       * useStore()ごとに作成されるuseSyncExternalStoreのstateを更新。
+       * useStore()ごとに作成されるuseSyncExternalStoreのstateに反映。
        * 結果としてuseStore()を呼び出したComponentが再描画される。
        */
     });
@@ -37,9 +35,10 @@ const create = (createState) => {
 
   // For reactivity, we define a function to subscribe.
   const subscribe = (listener) => {
-    console.log("added listener =", listener);
+    //console.log("added listener =", listener);
     // Add the callback function to the listeners set.
     listeners.add(listener);
+    console.log("added listener. size of listeners =", listeners.size);
     // And, return a function to unsubscribe.
     return () => {
       console.log("unsubscribe");
